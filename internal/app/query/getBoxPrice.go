@@ -48,11 +48,12 @@ func (h GetBoxPriceHandler) Handle(ctx context.Context, query GetBoxPrice) (*res
 	if len(query.Currency) < 1 || query.Currency == receiver.Currency {
 		endPrice = receiver.Price
 	} else {
-		endPrice, err = convertCurrent(receiver.Currency, query.Currency)
+		ratio, err := convertCurrent(receiver.Currency, query.Currency)
 
 		if err != nil {
 			return nil, err
 		}
+		endPrice = receiver.Price * ratio
 	}
 
 	response := response.PriceResponse{
@@ -113,5 +114,6 @@ func convertCurrent(source string, target string) (float64, error) {
 		return 0, nil
 	}
 
-	return 1.00 / m1 * m2, nil
+	return (1.00 / m1) * m2, nil
 }
+
