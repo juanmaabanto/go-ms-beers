@@ -1,0 +1,223 @@
+definitions:
+  command.CreateBeer:
+    properties:
+      brewery:
+        maxLength: 30
+        type: string
+      country:
+        maxLength: 20
+        type: string
+      currency:
+        maxLength: 5
+        type: string
+      id:
+        type: integer
+      name:
+        maxLength: 30
+        type: string
+      price:
+        type: number
+    required:
+    - brewery
+    - country
+    - currency
+    - id
+    - name
+    - price
+    type: object
+  response.BeerResponse:
+    properties:
+      brewery:
+        type: string
+      country:
+        type: string
+      currency:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  responses.ErrorResponse:
+    properties:
+      errorId:
+        type: string
+      errors:
+        additionalProperties:
+          type: string
+        type: object
+      message:
+        type: string
+      status:
+        type: integer
+      title:
+        type: string
+    type: object
+  responses.PaginatedResponse:
+    properties:
+      data: {}
+      pageSize:
+        type: integer
+      start:
+        type: integer
+      total:
+        type: integer
+    type: object
+info:
+  contact:
+    email: jmanuelabanto@gmail.com
+    name: Juan Manuel Abanto Mera
+    url: https://www.linkedin.com/in/juanmanuelabanto/
+  description: Specifying services for falabella.
+  license:
+    name: MIT License
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Beer API
+  version: v1
+paths:
+  /api/v1/beers:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: word to search
+        in: query
+        name: name
+        type: string
+      - description: Number of results per page
+        in: query
+        name: pageSize
+        type: integer
+      - description: Page number
+        in: query
+        name: start
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Return a Beers List.
+      tags:
+      - Beers
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Object to be created.
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/command.CreateBeer'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Id of the created object
+          schema:
+            type: int64
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Create a new beer.
+      tags:
+      - Beers
+  /api/v1/beers/{beerId}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Beer Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.BeerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Get a beer by Id.
+      tags:
+      - Beers
+  /api/v1/beers/{beerId}/boxprice:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: search one beer for Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: money to pay
+        in: query
+        name: currency
+        type: integer
+      - description: quantity
+        in: query
+        name: quantity
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponse'
+      summary: Return total price.
+      tags:
+      - Beers
+swagger: "2.0"
