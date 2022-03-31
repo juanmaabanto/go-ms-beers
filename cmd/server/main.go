@@ -67,8 +67,8 @@ func Handler(si ServerInterface, router *echo.Echo) {
 	router.GET("/*", echoSwagger.WrapHandler)
 
 	//beer
-	api.GET("/", si.ListBeer)
+	api.GET("", si.ListBeer)
 	api.GET("/:beerId", si.GetBeer)
-	api.POST("/", si.AddBeer)
+	api.POST("", si.AddBeer)
 	api.GET("/:beerId/boxprice", si.GetBoxPrice)
 }
