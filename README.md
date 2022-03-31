@@ -1,6 +1,8 @@
 # go-ms-beers
 micro service in Go
 
+There is a postman collection for testing apis in the project root "falabella.postman_collection.json"
+
 ## Installation
 
   ```sh
