@@ -31,7 +31,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/beers": {
+        "/beers": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -140,7 +140,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/beers/{beerId}": {
+        "/beers/{beerId}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -189,7 +189,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/beers/{beerId}/boxprice": {
+        "/beers/{beerId}/boxprice": {
             "get": {
                 "consumes": [
                     "application/json"

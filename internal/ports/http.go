@@ -35,7 +35,7 @@ func NewHttpServer(application app.Application) HttpServer {
 // @Failure 409 {object} responses.ErrorResponse
 // @Failure 422 {object} responses.ErrorResponse
 // @Failure 500 {object} responses.ErrorResponse
-// @Router /api/v1/beers [post]
+// @Router /beers [post]
 func (h HttpServer) AddBeer(c echo.Context) error {
 	item := command.CreateBeer{}
 
@@ -69,7 +69,7 @@ func (h HttpServer) AddBeer(c echo.Context) error {
 // @Failure 400 {object} responses.ErrorResponse
 // @Failure 404 {object} responses.ErrorResponse
 // @Failure 500 {object} responses.ErrorResponse
-// @Router /api/v1/beers/{beerId} [get]
+// @Router /beers/{beerId} [get]
 func (h HttpServer) GetBeer(c echo.Context) error {
 	var beerId int64
 	if n, err := strconv.Atoi(c.Param("beerId")); err == nil {
@@ -100,7 +100,7 @@ func (h HttpServer) GetBeer(c echo.Context) error {
 // @Success 200 {object} responses.PaginatedResponse
 // @Failure 400 {object} responses.ErrorResponse
 // @Failure 500 {object} responses.ErrorResponse
-// @Router /api/v1/beers [get]
+// @Router /beers [get]
 func (h HttpServer) ListBeer(c echo.Context) error {
 	pageSize, err := strconv.Atoi(c.QueryParam("pageSize"))
 
@@ -144,7 +144,7 @@ func (h HttpServer) ListBeer(c echo.Context) error {
 // @Failure 400 {object} responses.ErrorResponse
 // @Failure 404 {object} responses.ErrorResponse
 // @Failure 500 {object} responses.ErrorResponse
-// @Router /api/v1/beers/{beerId}/boxprice [get]
+// @Router /beers/{beerId}/boxprice [get]
 func (h HttpServer) GetBoxPrice(c echo.Context) error {
 	var beerId int64
 	if n, err := strconv.Atoi(c.Param("beerId")); err == nil {

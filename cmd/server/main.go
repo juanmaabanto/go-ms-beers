@@ -57,7 +57,7 @@ func Handler(si ServerInterface, router *echo.Echo) {
 
 	loggerManager := managers.NewLoggerManager("https://logger.mydominio.pe/", "ms-beer")
 
-	api := router.Group("/api/v1")
+	api := router.Group("/beers")
 
 	api.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		LoggerErrorFunc: loggerManager.Error,
@@ -67,8 +67,8 @@ func Handler(si ServerInterface, router *echo.Echo) {
 	router.GET("/*", echoSwagger.WrapHandler)
 
 	//beer
-	api.GET("/beers", si.ListBeer)
-	api.GET("/beers/:beerId", si.GetBeer)
-	api.POST("/beers", si.AddBeer)
-	api.GET("/beers/:beerId/boxprice", si.GetBoxPrice)
+	api.GET("/", si.ListBeer)
+	api.GET("/:beerId", si.GetBeer)
+	api.POST("/", si.AddBeer)
+	api.GET("/:beerId/boxprice", si.GetBoxPrice)
 }

@@ -77,7 +77,7 @@ info:
   title: Beer API
   version: v1
 paths:
-  /api/v1/beers:
+  /beers:
     get:
       consumes:
       - application/json
@@ -148,7 +148,7 @@ paths:
       summary: Create a new beer.
       tags:
       - Beers
-  /api/v1/beers/{beerId}:
+  /beers/{beerId}:
     get:
       consumes:
       - application/json
@@ -180,7 +180,7 @@ paths:
       summary: Get a beer by Id.
       tags:
       - Beers
-  /api/v1/beers/{beerId}/boxprice:
+  /beers/{beerId}/boxprice:
     get:
       consumes:
       - application/json

@@ -15,7 +15,7 @@
         "version": "v1"
     },
     "paths": {
-        "/api/v1/beers": {
+        "/beers": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -124,7 +124,7 @@
                 }
             }
         },
-        "/api/v1/beers/{beerId}": {
+        "/beers/{beerId}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -173,7 +173,7 @@
                 }
             }
         },
-        "/api/v1/beers/{beerId}/boxprice": {
+        "/beers/{beerId}/boxprice": {
             "get": {
                 "consumes": [
                     "application/json"
